@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 def ordenar_lista(lista):
     n = len(lista)
@@ -31,6 +32,7 @@ def analizar_notas(list):
     dataframe2=pd.DataFrame(dict1).transpose()
     print(dataframe2)
     plt.boxplot(x="notas",data=dataframe1)
+    sns.histplot(x="notas",data=dataframe1)
     plt.show()
 
 
