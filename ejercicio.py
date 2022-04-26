@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 def ordenar_lista(lista):
     n = len(lista)
@@ -17,29 +18,22 @@ def ordenar_lista(lista):
 list1=[3,19,10,15,14,12,9,8,11,12,11,12,13,11,14,16]
 
 
-def analizar(list):
+def analizar_notas(list):
     list=ordenar_lista(list)
-    dataframe=pd.DataFrame(list1,columns=["notas"])
-    x=dataframe["notas"].mean()
-    print(f"la media es {x}")
-    y=dataframe["notas"].median()
-    print(f"la mediana es {y}")
-    z=dataframe["notas"].std()
-    print(f"la desviacion estandar es {z}")
-    rv=dataframe["notas"].max()-dataframe["notas"].min()
-    print(f"el rango de variacion es {rv}")
+    dataframe1=pd.DataFrame(list,columns=["notas"])
+    x=dataframe1["notas"].mean()
+    y=dataframe1["notas"].median()
+    z=dataframe1["notas"].std()
+    rv=dataframe1["notas"].max()-dataframe1["notas"].min()
     cv=(z/x)*100
-    print(f"el coeficiente de variacion es {cv} %")
-    q1=dataframe["notas"].quantile(q=0.25,interpolation="linear")
-    print(f"el primer cuantil(25%) es {q1}")
-    q2=dataframe["notas"].quantile(q=0.5,interpolation="linear")
-    print(f"el primer cuantil(50%) es {q2}")
-    q3=dataframe["notas"].quantile(q=0.75,interpolation="linear")
-    print(f"el primer cuantil(75%) es {q3}")
-    grafica1=sns.histplot(x="notas",data=dataframe)
-    print(grafica1)
-    grafica2=sns.boxplot(x="notas",data=dataframe)
-    print(grafica2)
+    q1=dataframe1["notas"].quantile(q=0.25,interpolation="linear")
+    q2=dataframe1["notas"].quantile(q=0.5,interpolation="linear")
+    q3=dataframe1["notas"].quantile(q=0.75,interpolation="linear")
+    dict1={"notas":[list],"media":[x],"mediana":[y],"desviacion_estandar":[z],"rango_variacion":[rv],"coeficiente_variacion":[cv],"q1":[q1],"q2":[q2],"q3":[q3]}
+    dataframe2=pd.DataFrame(dict1).transpose()
+    print(dataframe2)
+    plt.boxplot(x="notas",data=dataframe1)
+    plt.show()
 
 
-analizar(list1)
+analizar_notas(list1)
